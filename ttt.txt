@@ -1,5 +1,7 @@
-revert
 ttt
 ccc
+<<<<<<< HEAD
 revert
 after revert
+=======
+>>>>>>> parent of 9ff3e88 (before revert)
