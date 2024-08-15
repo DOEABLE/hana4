@@ -4,15 +4,37 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DOHEE</title>
+    <style>
+      ul.checkgroup > li {
+        cursor: pointer;
+      }
+    </style>
   </head>
+
   <body>
     <div class="container">
       <header>
-        <h1>이것이 HEADER다.</h1>
+        <h1>body>header>h1</h1>
       </header>
 
+      <form action="a.html">
+        <!-- 라디오박스, checkbox -->
+        <fieldset>
+          <legend>Checkbox</legend>
+          <ul style="list-style: none" class="checkgroup">
+            <!-- class="checkgroup"이라는 클래스 이름을 지정하고 <head>에 '정의' 해야한다. -->
+            <li>
+              <label> <input type="checkbox" value="blue" />Blue Team </label>
+            </li>
+            <li>
+              <label> <input type="checkbox" value="Red" />Red Team </label>
+            </li>
+          </ul>
+        </fieldset>
+      </form>
+
       <section data-id="1">
-        <h2>Email 과 비밀번호를 입력하시오.</h2>
+        <h2>Email와 비밀번호를 입력하세요.</h2>
         <form action="a.html">
           <label for="email">Email:</label>
           <input type="email" id="email" />
@@ -27,6 +49,49 @@
           <!-- 텍스트를 넣을 수 있는 공간 -->
           <button type="submit">비밀번호 분실</button>
         </form>
+      </section>
+
+      <!-- html,css(2/2) -->
+      <section>
+        <figure>
+          <figcaption><h2>Figcaption</h2></figcaption>
+          <table border="1">
+            <caption>
+              1학기 시간표
+            </caption>
+            <colgroup>
+              <col />
+              <col span="2" style="background-color: yellow" />
+            </colgroup>
+            <thead>
+              <tr>
+                <th style="color: green">id</th>
+                <th style="color: red">name</th>
+                <th>address</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="color: green">111</td>
+                <td>
+                  <a href="a.html" target="_blank">a.html</a>
+                </td>
+                <td>222</td>
+                <td>333</td>
+              </tr>
+              <tr>
+                <td>111</td>
+                <td>2-2</td>
+                <td>2-3</td>
+              </tr>
+              <tr>
+                <td>3-1</td>
+                <td>3-2</td>
+                <td>3-3</td>
+              </tr>
+            </tbody>
+          </table>
+        </figure>
       </section>
     </div>
     <footer style="font-size: 0.8rem">&copy; Hanaro</footer>
