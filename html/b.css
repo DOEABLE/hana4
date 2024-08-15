@@ -1,0 +1,11 @@
+.m-6 {
+  margin: 10rem 10rem;
+}
+
+.regist-form .row {
+  margin-bottom: 0em;
+}
+
+.regist-form input.disabled {
+  text-align: center;
+}
