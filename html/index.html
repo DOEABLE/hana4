@@ -5,8 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DOHEE</title>
     <style>
-      ul.checkgroup > li {
+      @import url(http://fonts.googleapis.com.com/earlyaccess/nanumgothic.css);
+      .ng-font {
+        font-family: 'Nanum Gothic', 돋움;
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      ul.checkgroup label {
+        /* checkgroup>li label(>(꺾새는 ul의 바로 하위인 li를 가져올때만 쓰인다)) */
         cursor: pointer;
+        font-weight: 700; /* 볼드 */
+      }
+
+      input#email {
+        color: brown;
       }
     </style>
   </head>
@@ -18,10 +33,33 @@
       </header>
 
       <form action="a.html">
-        <!-- 라디오박스, checkbox -->
+        <fieldset>
+          <legend>Select Box</legend>
+          <select name="select" id="select">
+            <option value="111">111x</option>
+            <option value="222">222x</option>
+            <option value="333">333x</option>
+          </select>
+          <!-- input의 list와 datalist의 id는 일치해야한다 -->
+          <input type="text" id="captain" list="member" />
+          <datalist id="member">
+            <option value="111">111x</option>
+            <option value="222">222x</option>
+            <option value="333">333x</option>
+          </datalist>
+
+          <input type="search" />
+          <!-- 텍스트를 쓰고 한번에 지울 수 있는 버튼이 활성화된다. -->
+          <input type="number" />
+          <!-- 버튼으로 숫자증,감소가 가능함. -->
+          <label><progress value="50" max="100">진행률</label>
+          <meter value="0.6" min="0.2" max="0.9" optimun="0.8"></meter>
+          
+        </fieldset>
+        <!-- checkbox -->
         <fieldset>
           <legend>Checkbox</legend>
-          <ul style="list-style: none" class="checkgroup">
+          <ul class="checkgroup">
             <!-- class="checkgroup"이라는 클래스 이름을 지정하고 <head>에 '정의' 해야한다. -->
             <li>
               <label> <input type="checkbox" value="blue" />Blue Team </label>
@@ -31,8 +69,21 @@
             </li>
           </ul>
         </fieldset>
+        <!-- 라디오박스 :label에 name을 동일하게 지정해주어야 그룹이 지어짐 -> 그러면 하나만 선택 가능하다 -->
+        <fieldset>
+          <legend>Radio</legend>
+          <ul>
+            <!-- ul>(li>label>input[type=radio])*2 -->
+            <li>
+              <label><input type="radio" name="team" />파랑팀</label>
+            </li>
+            <li>
+              <label><input type="radio" name="team" />빨강팀</label>
+            </li>
+          </ul>
+        </fieldset>
       </form>
-
+      <!-- Join The Membership -->
       <section data-id="1">
         <h2>Email와 비밀번호를 입력하세요.</h2>
         <form action="a.html">
@@ -94,6 +145,8 @@
         </figure>
       </section>
     </div>
+    <p>브라우저 글꼴 사용</p>
+    <p class="ng-font">나눔 고딕 폰트사용</p>
     <footer style="font-size: 0.8rem">&copy; Hanaro</footer>
   </body>
 </html>
