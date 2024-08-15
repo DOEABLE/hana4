@@ -3,30 +3,32 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>HTML Practice</title>
+    <title>DOHEE</title>
   </head>
   <body>
     <div class="container">
-      <header class="header">
-        <h1>This is header</h1>
+      <header>
+        <h1>이것이 HEADER다.</h1>
       </header>
+
       <section data-id="1">
-        <h2>정보를 입력하세요</h2>
+        <h2>Email 과 비밀번호를 입력하시오.</h2>
         <form action="a.html">
-          <!-- 방법1 -->
           <label for="email">Email:</label>
           <input type="email" id="email" />
-          <!-- 방법2 -->
+
           <label for="passwd">
             Password:
             <input type="password" id="passwd" />
           </label>
-          <!-- <input type="password" id="passwd" /> -->
           <button type="submit">Sign in</button>
           <button type="reset">Cancel</button>
+          <p style="line-height: 1; font-size: xx-small"></p>
+          <!-- 텍스트를 넣을 수 있는 공간 -->
+          <button type="submit">비밀번호 분실</button>
         </form>
       </section>
-      <footer style="font-size: 0.8rem">&copy; Hanaro</footer>
     </div>
+    <footer style="font-size: 0.8rem">&copy; Hanaro</footer>
   </body>
 </html>
