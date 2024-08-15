@@ -3,34 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>First HTML page1.1</title>
-    <link rel="styleseet" hype="a.css" />
+    <title>HTML Practice</title>
   </head>
-
   <body>
     <div class="container">
       <header class="header">
-        <h1>Header</h1>
+        <h1>This is header</h1>
       </header>
       <section data-id="1">
-        <h2>Section1</h2>
+        <h2>정보를 입력하세요</h2>
         <form action="a.html">
+          <!-- 방법1 -->
           <label for="email">Email:</label>
           <input type="email" id="email" />
-
+          <!-- 방법2 -->
           <label for="passwd">
             Password:
-            <input type="password" id="passwd"></input>
+            <input type="password" id="passwd" />
           </label>
+          <!-- <input type="password" id="passwd" /> -->
+          <button type="submit">Sign in</button>
           <button type="reset">Cancel</button>
-          <button type="submit">Sign In</button>
         </form>
       </section>
-      <!-- em :현재 폰트사이즈 기준 / rem :root=body 폰트사이즈 기준 -->
-      <footer style="font-size: 0.8rem">
-        &copy; Hanaro
-        <!-- copywrite -->
-      </footer>
+      <footer style="font-size: 0.8rem">&copy; Hanaro</footer>
     </div>
   </body>
 </html>
