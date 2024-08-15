@@ -1,8 +1,18 @@
-#hhh {
-  color: greenyellow;
+@import url(http://fonts.googleapis.com.com/earlyaccess/nanumgothic.css);
+.ng-font {
+  font-family: "Nanum Gothic", 돋움;
 }
-.checkgroup label {
+
+ul {
+  list-style: none;
+}
+
+ul.checkgroup label {
+  /* checkgroup>li label(>(꺾새는 ul의 바로 하위인 li를 가져올때만 쓰인다)) */
   cursor: pointer;
+  font-weight: 700; /* 볼드 */
 }
-ul label {
+
+input#email {
+  color: brown; /* email은 갈색으로 써진다 */
 }
