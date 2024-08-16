@@ -3,9 +3,22 @@
 }
 
 .regist-form .row {
-  margin-bottom: 0em;
+  margin-bottom: 2rem;
 }
 
 .regist-form input.disabled {
   text-align: center;
+}
+.input-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+}
+
+.input-container input {
+  width: 100%;
+}
+
+.regist-form {
+  margin-bottom: 2rem;
 }
