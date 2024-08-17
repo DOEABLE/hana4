@@ -1,3 +1,10 @@
+/**
+ * File Name: bseat.js
+ * Author: KIMDOHEE
+ * Title: 좌석배치표 만들기
+ * Date Created: 2024-08-17
+ * Description: 랜덤으로 좌석을 배정하고 그에 따른 안내문 출력
+ */
 const students = [
   "평균",
   "중앙값",
