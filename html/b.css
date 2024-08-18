@@ -1,0 +1,24 @@
+.m-6 {
+  margin: 10rem 10rem;
+}
+
+.regist-form .row {
+  margin-bottom: 2rem;
+}
+
+.regist-form input {
+  text-align: center;
+}
+.input-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+}
+
+.input-container input {
+  width: 100%;
+}
+
+.regist-form {
+  margin-bottom: 2rem;
+}

@@ -1,4 +1,7 @@
 *.local
 node_modules
+#/node_modules
 tmp
 .DS_Store
+#./ppp.txt
+ppp.txt
