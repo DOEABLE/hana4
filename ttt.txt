@@ -19,3 +19,5 @@ jjj
 >>>>>>> parent of 9ff3e88 (before revert)
 xxx
 stash test ttt.txt
+testteststashtest
+COMPLIATE__
