@@ -2,3 +2,4 @@ CCCCCC
 aaaaaa
 stash
 stash test git stash pop aaa
+test test test
