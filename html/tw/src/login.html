@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="../dist/output.css">
+</head>
+
+<body>
+    <div class="container mx-auto border mt-5 p-5">
+        <h1 class="text-3xl font-semibold text-center mb-3">Login</h1>
+        <form>
+          <div class="grid grid-cols-3 md:gap-3 gap-0">
+            <div class="h-6 items-baseline">
+              <label for="email">Email</label>
+            </div>
+            <div class="col-span-full md:col-span-2">
+              <input id="email" type="email" placeholder="your email..." class="border rounded px-2 w-full" />
+            </div>
+    
+            <div class="mt-3">
+              <label for="passwd">Password</label>
+            </div>
+            <div class="col-span-full md:col-span-2">
+              <input id="passwd" type="password" class="border rounded px-2 w-full" />
+            </div>
+          </div>
+    
+          <div class="mt-5 flex justify-between">
+            <a href="./register.html" class="underline text-blue-400 underline-offset-4">Register</a>
+    
+            <button type="submit" class="btn btn-primary">Login</button>
+          </div>
+        </form>
+      </div>
+
+
+
+    <!-- <div class="flex justify-center items-center h-screen bg-sky-500">
+        <div class="container w-95 bg-white p-5 rounded-md">
+            <h1 class="text-3xl underline underline-offset-8 text-center font-semibold"><i class="fa-regular fa-user"> register</i></h1>
+
+            <form class="mt-5">
+                <div class="mt-3">
+                    <label for="nickname" class="w-full">Nickname</label>
+                    <input id="nickname" type="text" class="px-2 py-1 border rounded-md w-full focus:outline-none focus:ring-0 focus:border-blue-500">
+                </div>
+                <div class="mt-3">
+                    <label for="email" class="w-full">Email</label>
+                    <input id="email" type="email" class="px-2 py-1 border rounded-sm w-full focus:outline-none focus:ring-0 focus:border-blue-500">
+                </div>
+                <div class="mt-3">
+                    <label for="passwd" class="w-full">Password</label>
+                    <input id="passwd" type="Password" class="px-2 py-1 border rounded-sm w-full focus:outline-none focus:ring-0 focus:border-blue-500">
+                </div>
+                <label class="mt-3">
+                    <input for="apply" class="w-full"></input>
+                    <label id="apply" type="text" class="cursor-pointer">Apply...</label>
+
+
+                <button class="btn btn-primary w-full normal-case">
+                    <i class="fa-solid fa-arrow-right-to-bracket mr-1">REGIST</i></button>    
+            </form>
+        </div>
+    </div> -->
+</body>
+
+</html>
