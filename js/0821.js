@@ -23,8 +23,7 @@ function squareRoot(num) {
         }
     }
 }
-squareRoot(10);
-console.log("");
+//squareRoot(10);
 
 
 /*!Number.isInteger 이용 */
@@ -42,21 +41,16 @@ irrationalNum(10);                                                  //2,3,5,6,7,
 
 
 /* 연습2-2. 주어진 값의 제곱근을 출력하고, 가장 큰 수가 무리수가 아닐 때 까지 sqrt값을 출력하는 함수를 작성하시오 */
-function printIrr(num) {
+function squareRoot(num) {
+    let chogi = 1;
     do{
-        const sr = Math.sqrt(num);
-                            
-    } while ((sr % 1) != 0);                 //조건) 무리수인가?
-    
-    for(let i = 1; i<=num; i+=1) {
-        let irrNum = Math.sqrt(i);
-        if(!Number.isInteger(irrNum))                               // ->정수인지 무리수 판별 if(irrNum % 1 !==0)
-            console.log(irrNum.toFixed(3));
-    }
-    console.log();
-    
+        const sr = Math.sqrt(chogi);
+        console.log("🚀 sr:", chogi, +sr.toFixed(3))              //'s:', n, +s.toFixed(3)
+        if(Math.sqrt(chogi + 1) % 1 === 0) break;                 //무한루프면 반드시 break가 있어야 함.
+        chogi++;
+    } while (true);                                             //조건) 무리수인가?
 }
-printIrr(9);
+squareRoot(9);
 
 /* 배열로 받기 */
 
@@ -69,6 +63,7 @@ printIrr(9);
 /* 연습3. 오늘 날짜의 요일을 출력 */
 console.log("------------switch문 이용------------");
 
+const WEEK_NAMES = [...'일월화수목금토'];
 function todayIs() {
     let day;                                            //요일지정 변수
     let week = new Date().getDay();                     //오늘 날짜를 받자...
@@ -104,6 +99,10 @@ function todayIs() {
 
 
 
+
+
+
+
 /* 연습 4 올바른 더하기 연산(정밀도 문제) */
 function addPoints(a,b) {
     const alen = a.toString().length;
@@ -116,3 +115,10 @@ function addPoints(a,b) {
 addPoints(0.21354, 0.1);
 addPoints(0.14, 0.28);
 addPoints(0.34, 0.226);
+
+
+
+
+
+    
+    
