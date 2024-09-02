@@ -1,4 +1,4 @@
-const assert = require('assert');
+//const assert = require('assert');
 const user = {                  
     ''      : 1,        
     ' '     : 1,       
@@ -112,15 +112,13 @@ for(const key in obj){
         console.log(obj[key]);
     }
 }
-//-----------------------------------------
 
-console.log('for-of문을 사용하여 프로퍼티 값을 출력하시오.');
+
+//5. for-of문을 사용하여 프로퍼티 값을 출력하시오. -> value값을 받아야함
 for(const key of Reflect.ownKeys(obj)){
     console.log(obj[key]);
 }
 
-
-console.log('=============6. in class===============');
 //6. level 프로퍼티가 열거(entries)되지 않도록 설정하시오.
 Object.defineProperty(obj, 'level', {enumerable: false});
 console.log(obj);
@@ -130,13 +128,8 @@ Object.freeze(obj, 'role');
 console.log(Object.getOwnPropertyDescriptors(obj));
 
 
-/* const solKeys = assert.deepStrictEqual(forInKeys(arr),Object.keys(arr));
-const solValue = assert.deepStrictEqual(forInvalues(arr),Object.values(arr));
-console.log("🚀 ~ solKeys:", solKeys);
-console.log("🚀 ~ solValue:", solValue); */
 
-
-//p.135
+console.log('----p.135-------------------------------------');
 function ex3(){
     const data =[
         ['A', 10, 20],
@@ -145,29 +138,34 @@ function ex3(){
     ];
 
     function makeObjectFromArray(array){
-        const  retObj = {};
-        for(const [key, ...vals] of array){     //key(A), ...vals: 10,20(나머지 값)
-            retObj[key] = vals;
-            //retObj [a[0]] = [a[1],a[2]];
+        const arrayToObj = {}
+        for(const [key,...vals] of array){  //key(A), ...vals: 10,20(나머지 값)
+            arrayToObj[key] = vals;
+            //arrayToObj [a[0]] = [a[1],a[2]];
         }
-        return retObj;
+        return arrayToObj;
     }
     const dataObj = makeObjectFromArray(data);
     console.log(dataObj);
 
 
-    function makeArrayFromObject(obj){
-        const result =[];
+
+
+    function makeArrayFromObject(obj) {
+        const results = [];
         for(const key in obj){
-            results.push([key,...obj[key]]);            /* ...obj[key]]얘를 ...을 이용해 펼쳐서 하나의 일차원배열로 만듦 */
+            results.push([key, obj[key]]);
         }
         return results;
     }
-    console.log("🚀 ~ makeArrayFromObject ~ makeArrayFromObject:", makeArrayFromObject)
-    
-    assert.deepStrictEqual(makeArrayFromObject(dataObj), data, 'data vs makeArray');
-
+    const dataArray = makeArrayFromObject(dataObj);
+    console.log(dataArray);
 }
+ex3();
+
+
+
+
 
 
 
@@ -175,16 +173,16 @@ function ex3(){
 /*  id, name 은 프리미티브라 값을 전달하지만 addr은 주소값을 전달 -> call by reference -> 재귀함수 */
 function sallowCopy(obj){
     const kim = {nid: 3, nm: 'Kim', addr: {city: 'Pusan'}};
-    const newKim = {};
-    for(const k in kim) {   //객체는 for 쓰는거 아니야.
-        newKim[k] = kim[k];
+    const newkim = {};
+    for(const k in kim){
+        newkim[k] = kim[k]
     }
-    newKim.addr = 'Daegu';
-    console.log('sallow>>', kim.addr!==newKim.addr);    //true면 통과
-    console.log('kim newkim', kim, newKim);
+    newkim.addr = 'daejeon'
+    newkim.age = 29
+    console.log(newkim, 'kim>>',kim)
     /* kim과 newKim은 힙의 다른 주소값을 가진다. */
 }
-
+sallowCopy()
 
 
 /* function isObject(obj){
