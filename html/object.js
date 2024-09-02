@@ -1,4 +1,4 @@
-//const assert = require('assert');
+const assert = require('assert');
 const user = {                  
     ''      : 1,        
     ' '     : 1,       
@@ -23,7 +23,7 @@ console.log(user.getInfo());
     //return `${this.id}-${this.name}` 이 객체의 id-name key의 값을 반환해줌 
 
 
-//-----------------------------------------
+
 let symbolKeys;
 for(let i = 0; i < keys.length; i++){
     const typ = typeof keys[i];
@@ -39,9 +39,28 @@ console.log(user);
 //delete user.addr;                           //addr먼저 지우고 여기에 있는 모든 user를 출력할 때, addr은 없음.
 console.log('addr' in user);                    //true
 console.log(user.hasOwnProperty('addr'));       //true    
-console.log(Reflect.has(user,'addr'));       //true    
+console.log(Reflect.has(user,'addr'));          //true    
+const key_value =Object.entries(user);
 
-
+console.log('-------------위 아래 동일------------');
+function entriesWithSymbol(obj){
+    if(!obj || typeof obj !=='object') return [];
+    const entries = Object.entries(obj);
+    const onlySymbolKeys = Object.getOwnPropertySymbols(obj);
+    for(const sym of onlySymbolKeys){
+        entries.push([sym, obj[sym]]);
+    }
+    return entries;
+}    
+console.log("🚀 entriesWithSymbol:", entriesWithSymbol(user))
+Object.defineProperty(user, 'addr',{
+    value: 45,
+    writable:true, 
+    enumerable: false, 
+    configurable:true});
+console.log(Object.getOwnPropertyDescriptor(user,'addr'));
+const u4 = Object.create(user);
+Object.getPrototypeOf(u4) ;
 
 
 
@@ -50,61 +69,54 @@ console.log(Reflect.has(user,'addr'));       //true
 i=0;
 var arr = [100, 200, 300, 400, 500, 600, 700];
 function ex1(){
-
     let results = [];
-    for (const idx in arr) {//in: 객체를    
-        //console.log(idx/* +":"+ arr[key] */); // 속성과 해당 값 출력
-        results.push(arr[key]);
+    for(const key in arr){
+        results.push(key);
     }
     return results;
     
 }
+console.log(ex1());
 
 
 /*for-in 을 사용하는 이유.
 for-of는 iterable 해야한다. 하나를 다 처리할때까지 next를 돌지 않음.  */
 
 ////2. for-in문을 사용하여 배열의 원소(값)를 출력하시오. (of)
-for (const value of arr) {
-    console.log(value);
+function ex2(){
+    let results = [];
+    for(const key in arr){
+        results.push(arr[key]);
+    }
+    return results;
+    
 }
-//solution during the class
-//let solKeys = assert.deepStrictEqual(forInKeys(arr),Object.keys(arr));
-//let solValue = assert.deepStrictEqual(forInvalues(arr),Object.values(arr));
-//console.log("🚀 ~ solKeys:", solKeys);
-//console.log("🚀 ~ solValue:", solValue);
+console.log(ex2());
 
 
 
-
-const obj = { name: 'Kim', addr: 'Yongsan', level: 1, role: 9, receive: false }
 
 //inclass
 /* 객체는 iterable 하지 않음. */
-for(const x in obj) {
-    console.log(x);
-}
 
+const obj = { name: 'Kim', addr: 'Yongsan', level: 1, role: 9, receive: false }
 //3. for-in문을 사용하여 프로퍼티 이름(키)들을 출력하시오.
-for(const key in obj){
+for(const key in obj) {
     console.log(key);
 }
 
 
 //4. for-in문을 사용하여 프로퍼티 값을 출력하시오.
-/* for(const value of obj){
-    console.log(value);
-} */
-for (const key in obj) {
-    if (obj.hasOwnProperty(key)) { // 고유 프로퍼티인가?
-        console.log(obj[key]); // 프로퍼티 값 출력
+for(const key in obj){
+    if(obj.hasOwnProperty(key)){
+        console.log(obj[key]);
     }
 }
+//-----------------------------------------
 
-//5. for-of문을 사용하여 프로퍼티 값을 출력하시오.
-for (const k of Reflect.ownKeys(obj)) {
-    console.log(k, obj[k]);
-    //rets.push([[k, obj[k]]]);
+console.log('for-of문을 사용하여 프로퍼티 값을 출력하시오.');
+for(const key of Reflect.ownKeys(obj)){
+    console.log(obj[key]);
 }
 
 
@@ -118,9 +130,13 @@ Object.freeze(obj, 'role');
 console.log(Object.getOwnPropertyDescriptors(obj));
 
 
+/* const solKeys = assert.deepStrictEqual(forInKeys(arr),Object.keys(arr));
+const solValue = assert.deepStrictEqual(forInvalues(arr),Object.values(arr));
+console.log("🚀 ~ solKeys:", solKeys);
+console.log("🚀 ~ solValue:", solValue); */
 
 
-
+//p.135
 function ex3(){
     const data =[
         ['A', 10, 20],
