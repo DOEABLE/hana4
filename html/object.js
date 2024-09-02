@@ -168,7 +168,6 @@ ex3();
 
 
 
-
 //p.136
 /*  id, name 은 프리미티브라 값을 전달하지만 addr은 주소값을 전달 -> call by reference -> 재귀함수 */
 function sallowCopy(obj){
@@ -185,7 +184,10 @@ function sallowCopy(obj){
 sallowCopy()
 
 
-/* function isObject(obj){
+
+
+
+function isObject(obj){
     return !obj || typeof obj !== 'object';
 }
 
@@ -208,8 +210,8 @@ function copyObject(obj){      //decopy 함수
 const newKim = copyObject(jeong);
 assert.deepStrictEqual(jeong.newKim);
 newKim.addr.city = 'Daegu';
-    assert.notdeepStrictEqual(jeong.newKim);
-  */
+assert.notdeepStrictEqual(jeong.newKim);
+ 
 
 
     
