@@ -50,6 +50,8 @@ const LINE2 = [
     '을지로입구'
   ]
 
+
+
   class Subway {
     #currIdx;
     #start;
@@ -80,32 +82,41 @@ const LINE2 = [
             yield this.nextStation();
         }
     }
+
     toString(){
-        return {'${this.#start}역에서 출발하여 ${this.#end}역까지 가는 중. 현재역은 ${}입니다.'};
+        return `${this.#start}역에서 출발하여 ${this.#end}역까지 가는 중. 현재 역은 ${LINE2[this.#currIdx]}입니다.`;
+        }
     }
-}
-
-
-
-const it1 = routes[Symbol.iterator]();
-['문래','대림','구로디지털단지','신대방','신림'].forEach(value, i) =>{
-    assert.deepStrictEqual(it1.next(),{
-
-    }
-
-    }
-
-})
 
 
 const routes = new Subway('문래', '신림');
 console.log([...routes]); // [ '문래', '대림', '구로디지털단지', '신대방', '신림' ]
-console.log(it1.next()); // { value: '문래', done: false }
-// ...
-console.log(it1.next()); // { value: '신림', done: false }
-console.log(it1.next()); // { value: undefined, done: true }
-console.log(it1.next()); // { value: undefined, done: true }
+assert.deepStrictEqual(
+    [...routes],
+    [ '문래', '대림', '구로디지털단지', '신대방', '신림' ]
+);
 
+
+const it1 = routes[Symbol.iterator]();
+['문래','대림','구로디지털단지','신대방','신림'].forEach((value, i) =>{
+    assert.deepStrictEqual(it1.next(),{value, done:false});
+    console.log(i,routes.toString());
+});
+//console.log(it1.next())
+assert.strictEqual(it1.next(),{
+    value: undefined,done:true});
+
+
+    
+const route3 = new Subway('문래', '합정');             // 46개 정거장이면 통과!
+assert.strictEqual([...route3].length, 46);
+    
+    
+const route4 = new Subway('신도림', '을지로입구');      // 48개 정거장이면 통과!
+assert.strictEqual([...route4].length, 48);
+    
+
+/* to-do
 const routes2 = new Subway('구로디지털단지', '성수');  // 32개 정거장
 console.log([...routes]); // ['구로디지털단지', '신대방', ..., '성수']
 const it2 = routes2[Symbol.iterator]();
@@ -113,18 +124,4 @@ while (true) {
     const x = it2.next();
     console.log(x);
     if (x.done) break;
-}
-const route3 = new Subway('문래', '합정');             // 46개 정거장이면 통과!
-assert.strictEqual(it1.next(),{
-    value: undefined,done:true});
-
-const route4 = new Subway('신도림', '을지로입구');      // 48개 정거장이면 통과!
-
-
-
-//test
-
-    [...routes],
-    ['문래','대림','구로디지털단지','신대방','신림']
-);
-
+} */
