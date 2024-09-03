@@ -56,7 +56,7 @@ const LINE2 = [
     #currIdx;
     #start;
     #end;
-    #didend=false;
+    #didEnd=false;
     constructor(start, end) {
         this.#start = start;
         this.#currIdx = LINE2.indexOf(start);
@@ -66,16 +66,16 @@ const LINE2 = [
     nextStation(){
         if(this.#currIdx === LINE2.length)
             this.#currIdx = 0;
-        const station = LINE2[this.#currIdx++];
-        //this.#didend = this.#currIdx === LINE2.indexOf(this.#end);   //매번 돌아야하는 indexOf 무거워질 수 있으니 함부로 쓰면 안됨.
-        this.#didend = currStation === this.#end;   
+        const currStation = LINE2[this.#currIdx++];
+        //this.#didEnd = this.#currIdx === LINE2.indexOf(this.#end);   //매번 돌아야하는 indexOf 무거워질 수 있으니 함부로 쓰면 안됨.
+        this.#didEnd = currStation === this.#end;   
         return currStation;      //역을 순회해야하니 ++사용
     }
 
     *[Symbol.iterator](){
         while(true){
             if(this.#didEnd){
-                this.#didend = false;
+                this.#didEnd = false;
                 this.#currIdx = LINE2.indexOf(this.#start);
                 break;
             }          //break로종료조건먼저
@@ -116,7 +116,7 @@ const route4 = new Subway('신도림', '을지로입구');      // 48개 정거�
 assert.strictEqual([...route4].length, 48);
     
 
-/* to-do
+
 const routes2 = new Subway('구로디지털단지', '성수');  // 32개 정거장
 console.log([...routes]); // ['구로디지털단지', '신대방', ..., '성수']
 const it2 = routes2[Symbol.iterator]();
@@ -124,4 +124,4 @@ while (true) {
     const x = it2.next();
     console.log(x);
     if (x.done) break;
-} */
+}
