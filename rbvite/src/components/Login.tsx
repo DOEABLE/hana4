@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState, useRef } from 'react';
+import { FormEvent, useRef } from 'react';
 import Button from './atoms/Button';
 import LabelInput from './molecules/LabelInput';
 
@@ -7,18 +7,22 @@ export default function Login({
 }: {
   login: (id: number, name: string) => void;
 }) {
-  const [id, setId] = useState(0);
+  //const [id, setId] = useState(0);
   // const [name, setName] = useState('');
+  const idRef = useRef<HTMLInputElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
   const signIn = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const id = idRef.current?.value;
+    const name = nameRef.current?.value;//value를 사용하기 위해 HTMLInputElement를 적어줘야함.
     if (!id || !name) {
       alert('id와 name을 입력해주세요.');
       return;
     }
-    login(id, name);
+    login(+id, name);
   };
-  /*  const signIn = (e: FormEvent<HTMLFormElement>) => {
+  /* 바닐라js방식
+   const signIn = (e: FormEvent<HTMLFormElement>) => {
   e.preventDefault();
   const eles = e.currentTarget.elements;
   const { id, name } = eles as typeof eles & {
@@ -26,18 +30,18 @@ export default function Login({
     name: HTMLInputElement;
   }; */
 
-  const changeName = (e: ChangeEvent<HTMLInputElement>) => {
-    setName(e.currentTarget.value);
-  };
+  // const changeName = (e: ChangeEvent<HTMLInputElement>) => {
+  //   setName(e.currentTarget.value);
+  // };
 
   return (
     <form onSubmit={signIn} className='rounded-md border p-2'>
       <LabelInput
         label='ID'
         type='number'
-        onChange={(e) => setId(+e.currentTarget.value)}
+        ref={idRef}
+        //onChange={(e) => setId(+e.currentTarget.value)}
       />
-      <LabelInput label='Name' type='text' onChange={changeName} />
       {/* <div className='flex'>
         <label htmlFor='id' className='w-24'>
           ID:
@@ -57,12 +61,14 @@ export default function Login({
         <input
           id='name'
           type='text'
-          lef={nameRef}
+          ref={nameRef}
           autoComplete='off'
           placeholder='이름을 입력하세요.'
           className='inp'
+          //onChange={changeName}
         />
       </div>
+      {/* <LabelInput label='Name' type='text' onChange={changeName} /> */}
       {/* <button className='btn btn-success float-right m-3'>Sign In</button> */}
       <Button
         text='Sign In'
