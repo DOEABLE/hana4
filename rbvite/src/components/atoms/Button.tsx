@@ -1,22 +1,22 @@
-import { ButtonHTMLAttributes } from 'react';
+import { ButtonHTMLAttributes, PropsWithChildren } from 'react';
 
 type Props = {
-  text: string;
   variant?: string;
   classNames?: string;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
 export default function Button({
-  text,
+  children,
   variant = '',
   classNames = '',
   ...props
-}: Props) {
+}: PropsWithChildren<Props>) {
   return (
-    <div className='border border-green-500 p-5'>
-      <button {...props} className={`btn ${variant} ${classNames} normal-case`}>
-      {text}
+    <button
+      {...props}
+      className={`btn ${variant} ${classNames} inline-flex items-center normal-case`}
+    >
+      {children}
     </button>
-      </div>
   );
 }

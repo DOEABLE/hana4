@@ -1,13 +1,22 @@
-import { ReactNode, useState } from 'react';
+import {
+  ForwardedRef,
+  forwardRef,
+  ReactNode,
+  useImperativeHandle,
+  useState,
+} from 'react';
+import { useSession } from '../hooks/session-context';
+import { useCounter } from '../hooks/counter-hook';
 
 type TitleProps = {
   text: string;
-  name: string;
+  name?: string;
 };
+
 const Title = ({ text, name }: TitleProps) => {
   //console.log("ddd");
   return (
-    <h1>
+    <h1 className='text-3xl'>
       {text} {name}
     </h1> //함수형 component
   );
@@ -38,32 +47,32 @@ const Body = ({ children }: { children: ReactNode }) => {
 } */
 
 type Props = {
-  name: string;
   age: number;
-  count: number;
-  plusCount: () => void;
-  minusCount: () => void;
 };
 
-export default function Hello({
-  name,
-  age,
-  count,
-  plusCount,
-  minusCount,
-}: Props) {
-  //const [myState, setMyState] = useState(() => new Date().getTime());
-  const [myState, setMyState] = useState(0);
+export type MyHandler = {
+  jumpHelloState: () => void;
+};
+
+function Hello({ age }: Props, ref: ForwardedRef<MyHandler>) {
+  const {
+    session: { loginUser },
+  } = useSession();
+  const { count, plusCount, minusCount } = useCounter();
+  const [myState, setMyState] = useState(0); //myState를 바꿔주는 setMyState
   let v = 1;
-  //hello라는 component가 외부에 export(component 하나를 뜻함.)
-  console.debug('******', v, myState, count);
+  const handler: MyHandler = {
+    jumpHelloState: () => setMyState((pre) => pre * 10),
+  };
+  useImperativeHandle(ref, () => handler);
 
   return (
     <div className='mt-5 border border-green-900 border-slate-300 p-4 text-2xl text-blue-300'>
-      <Title text='Hi~ In Hello.tsx! My Name:' name={name} />
+      <Title text='Hi~ In Hello.tsx! My Name:' name={loginUser?.name} />
       {/* title은 component, component는 함수. */}
       <Body>
-        This is Hello Component. {v}-{myState} - {age}
+        <h3 className='text-center text-2xl'>myState: {myState}</h3>
+        This is Hello Component. {v} - {myState} - {age}
       </Body>
       <button
         onClick={() => {
@@ -83,3 +92,6 @@ export default function Hello({
     </div>
   );
 }
+
+const ImpHello = forwardRef(Hello);
+export default ImpHello;
