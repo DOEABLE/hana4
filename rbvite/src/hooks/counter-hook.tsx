@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createContext, PropsWithChildren, useContext, useState } from 'react';
 
 const contextInitValue = {
@@ -13,14 +14,10 @@ const CounterContext = createContext<CounterContextProps>(contextInitValue);
 export const CounterProvider = ({ children }: PropsWithChildren) => {
   const [count, setCount] = useState(0);
   const plusCount = () => {
-    setCount((pre) => {
-      //브라우저 console에서도 2씩증가되며 출력됨.
-      const newer = pre + 1;
-      return newer;
-    });
+    setCount((preCount) => preCount + 1);
   };
 
-  const minusCount = () => setCount((count) => count - 1);
+  const minusCount = () => setCount((preCount) => preCount - 1);
 
   return (
     <CounterContext.Provider value={{ count, plusCount, minusCount }}>
@@ -29,4 +26,11 @@ export const CounterProvider = ({ children }: PropsWithChildren) => {
   );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useCounter = () => useContext(CounterContext);
+
+export const useCount = (defVal = 0) => {
+  const [count, setCount] = useState(defVal);
+  const plusCount = (flag = 1) => setCount((pre) => pre + flag);
+  return [count, plusCount];
+};

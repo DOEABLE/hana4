@@ -7,7 +7,7 @@ import { FaRedo, FaSave } from 'react-icons/fa';
 
 type Props = {
   item: CartItem;
-  toggleAdding?: () => void; // add시에만 저달할 것!!
+  toggleAdding?: () => void;
 };
 
 export default function Item({ item, toggleAdding }: Props) {

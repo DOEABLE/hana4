@@ -2,19 +2,20 @@ import { FaPlus } from 'react-icons/fa6';
 import Login from './Login.tsx';
 import Profile from './Profile.tsx';
 import Button from './atoms/Button.tsx';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { useSession } from '../hooks/session-context.tsx';
 import Item from './Item.tsx';
+import useToggle from '../hooks/toggle.ts';
 
 export default function My() {
   const { session } = useSession();
-
-  const [isAdding, setIsAdding] = useState(false);
   const logoutButtonRef = useRef<HTMLButtonElement>(null);
 
+  /* const [isAdding, setIsAdding] = useState(false);
   const toggleAdding = () => {
-    setIsAdding((pre) => !pre);
-  };
+    setIsAdding((pre) => !pre);//기존 값을 반대로 토글
+  }; */
+  const [isAdding, toggleAdding] = useToggle();
 
   return (
     <>

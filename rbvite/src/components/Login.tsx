@@ -1,7 +1,8 @@
-import { FormEvent, useImperativeHandle, useRef } from 'react';
+import { FormEvent, useEffect, useImperativeHandle, useRef } from 'react';
 import Button from './atoms/Button';
 import LabelInput from './molecules/LabelInput';
 import { useSession } from '../hooks/session-context';
+import { useCounter } from '../hooks/counter-hook';
 
 export type LoginHandler = {
   focus: (prop: string) => void;
@@ -9,6 +10,7 @@ export type LoginHandler = {
 
 export default function Login() {
   const { login, loginRef } = useSession();
+  const { count, plusCount, minusCount } = useCounter();
   const idRef = useRef<HTMLInputElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
 
@@ -26,6 +28,21 @@ export default function Login() {
     const name = nameRef.current?.value ?? '';
     login(+id, name);
   };
+
+  /* useEffect(() => {
+    const intl = setInterval(() => console.log('xx'), 500); //얘를 실행했다가 나가서 또 실행하면 배로 빨라진다.
+    return clearInterval(intl); //그래서 clearInterval로 이전에 실행했던 것을 clear(소멸) 해줘야함.
+  }, []); */
+
+  useEffect(() => {
+    console.log('useEffect1', count);
+    plusCount();
+    return minusCount;
+  }, [count, plusCount, minusCount]);
+
+  /* useEffect(() => {
+    return minusCount; //소멸 시, -1
+  }, [minusCount]); */
 
   return (
     <>
