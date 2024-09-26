@@ -2,7 +2,7 @@ import { FaPlus } from 'react-icons/fa6';
 import Login from './Login.tsx';
 import Profile from './Profile.tsx';
 import Button from './atoms/Button.tsx';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useSession } from '../hooks/session-context.tsx';
 import Item from './Item.tsx';
 import useToggle from '../hooks/toggle.ts';
@@ -16,6 +16,18 @@ export default function My() {
     setIsAdding((pre) => !pre);//기존 값을 반대로 토글
   }; */
   const [isAdding, toggleAdding] = useToggle();
+
+  useEffect(() => {
+    const abortController = new AbortController();
+    fetch('/data/sample.json')
+      .then((res) => res.json())
+      .then((data) => {
+        console.log('data>>', data);
+      })
+      .catch((error) => console.error(error));
+
+    return () => abortController.abort('clean-up!');
+  }, []);
 
   return (
     <>

@@ -1,4 +1,10 @@
-import { FormEvent, useEffect, useImperativeHandle, useRef } from 'react';
+import {
+  FormEvent,
+  useEffect,
+  useImperativeHandle,
+  useLayoutEffect,
+  useRef,
+} from 'react';
 import Button from './atoms/Button';
 import LabelInput from './molecules/LabelInput';
 import { useSession } from '../hooks/session-context';
@@ -30,14 +36,29 @@ export default function Login() {
   };
 
   /* useEffect(() => {
-    const intl = setInterval(() => console.log('xx'), 500); //얘를 실행했다가 나가서 또 실행하면 배로 빨라진다.
-    return clearInterval(intl); //그래서 clearInterval로 이전에 실행했던 것을 clear(소멸) 해줘야함.
-  }, []); */
+    const intl = setTimeout((x) => console.log('xx', x), 500, 123); //얘를 실행했다가 나가서 또 실행하면 배로 빨라진다.
+    return clearTimeout(intl); //그래서 clearInterval로 이전에 실행했던 것을 clear(소멸) 해줘야함.
+  }, []);
+
+  useTimeout(
+    (y) => {
+      console.log('useTimeout!!', y);
+    },
+    500,
+    999
+  ); */
+
+  useLayoutEffect(() => {
+    // console.log('useLayoutEffect!!');
+  }, []);
 
   useEffect(() => {
     console.log('useEffect1', count);
     plusCount();
-    return minusCount;
+    return () => {
+      console.log('!!!', count);
+      minusCount();
+    };
   }, [count, plusCount, minusCount]);
 
   /* useEffect(() => {
