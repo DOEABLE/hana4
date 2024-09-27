@@ -9,6 +9,7 @@ import Button from './atoms/Button';
 import LabelInput from './molecules/LabelInput';
 import { useSession } from '../hooks/session-context';
 import { useCounter } from '../hooks/counter-hook';
+import { useInterval, useTimeout } from '../hooks/timer';
 
 export type LoginHandler = {
   focus: (prop: string) => void;
@@ -35,35 +36,27 @@ export default function Login() {
     login(+id, name);
   };
 
-  /* useEffect(() => {
-    const intl = setTimeout((x) => console.log('xx', x), 500, 123); //얘를 실행했다가 나가서 또 실행하면 배로 빨라진다.
-    return clearTimeout(intl); //그래서 clearInterval로 이전에 실행했던 것을 clear(소멸) 해줘야함.
-  }, []);
-
-  useTimeout(
-    (y) => {
-      console.log('useTimeout!!', y);
-    },
-    500,
-    999
-  ); */
+  useInterval(() => console.log('interval!!'), 1000);
+  const f = () => {
+    console.log('once?');
+  };
+  useTimeout(f, 1500);
 
   useLayoutEffect(() => {
     // console.log('useLayoutEffect!!');
   }, []);
 
   useEffect(() => {
-    console.log('useEffect1', count);
+    // console.log('useEffect1', count);
     plusCount();
     return () => {
-      console.log('!!!', count);
       minusCount();
     };
   }, [count, plusCount, minusCount]);
 
-  /* useEffect(() => {
-    return minusCount; //소멸 시, -1
-  }, [minusCount]); */
+  useEffect(() => {
+    idRef.current?.focus();
+  }, []);
 
   return (
     <>

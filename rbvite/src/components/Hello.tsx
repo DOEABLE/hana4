@@ -66,6 +66,15 @@ function Hello({ age }: Props, ref: ForwardedRef<MyHandler>) {
   };
   useImperativeHandle(ref, () => handler);
 
+  const {
+    data: friendInfo,
+    isLoading,
+    error,
+  } = useFetch<PlaceUser>(
+    `http://jsonplaceholder.typicode.com/users/${friend}`,
+    true,
+    [friend]
+  );
   return (
     <div className='mt-5 border border-green-900 border-slate-300 p-4 text-2xl text-blue-300'>
       <Title text='Hi~ In Hello.tsx! My Name:' name={loginUser?.name} />

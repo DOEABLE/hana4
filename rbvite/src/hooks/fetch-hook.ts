@@ -1,7 +1,28 @@
 import { useEffect, useState } from 'react';
 
-export const useFetch = <T>(url: string, depArr: unknown[] = []) => {
+const ABORT_REASON = 'My useFetch Clean-up!';
+const cache: Record<string, unknown> = {};
+
+interface ErrorWithMessage {
+  message: string;
+}
+const isErrorWithMessage = (error: unknown): error is ErrorWithMessage =>
+  typeof error === 'object' &&
+  error !== null &&
+  'message' in error &&
+  typeof error.message === 'string';
+
+const toErrorWithMessage = (error: unknown) =>
+  isErrorWithMessage(error) ? error : new Error(JSON.stringify(error));
+
+export const useFetch = <T>(
+  url: string,
+  isCache: boolean = false,
+  depArr: unknown[] = []
+) => {
   const [result, setResult] = useState<T>();
+  const [isLoading, setLoading] = useState(false);
+  const [error, setError] = useState<ErrorWithMessage>();
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -9,20 +30,31 @@ export const useFetch = <T>(url: string, depArr: unknown[] = []) => {
 
     (async function () {
       try {
-        const data = (await fetch(url, { signal }).then((res) =>
-          res.json()
-        )) as T;
-        console.log('useFetch.data>>', data);
+        if (isCache && url in cache) {
+          return setResult(cache[url] as T);
+        }
+
+        setLoading(true);
+        const data = (await fetch(url, { signal }).then((res) => {
+          if (res.ok) return res.json();
+          throw new Error(`${res.status} ${res.statusText}`);
+        })) as T;
+        //console.log('useFetch.data>>', data);
         setResult(data);
+        setError(undefined);
+
+        if (isCache) {
+          cache[url] = data;
+        }
       } catch (error) {
         console.error('Error>>', error);
       }
     })();
 
-    return () => abortController.abort('Clean-up!');
+    return () => abortController.abort(ABORT_REASON);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, depArr);
 
-  return result;
+  return { data: result, isLoading, error };
 };
