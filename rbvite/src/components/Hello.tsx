@@ -7,6 +7,8 @@ import {
 } from 'react';
 import { useSession } from '../hooks/session-context';
 import { useCounter } from '../hooks/counter-hook';
+import { useFetch } from '../hooks/fetch-hook';
+import { FaSpinner } from 'react-icons/fa6';
 
 type TitleProps = {
   text: string;
@@ -32,29 +34,36 @@ const Body = ({ children }: { children: ReactNode }) => {
   );
 };
 
-/* function useState<S>(initValueOrFn) {
-  const state = {
-    _state: initValueOrFn,
-    get state() {
-      return this._state;
-    },
-    setState(x: S) {
-      this._state = x;
-      vdom.trigger(this);
-    }
-  }
-  return [state.state, state.setState];
-} */
+// function useState<S>(initValueOrFn) {
+//   const state = {
+//     _state: initValueOrFn,
+//     get state() {
+//       return this._state;
+//     },
+//     setState(x: S) {
+//       this._state = x;
+//       vdom.trigger(this);
+//     }
+//   }
+//   return [state.state, state.setState];
+// }
 
 type Props = {
-  age: number;
+  friend: number;
 };
 
 export type MyHandler = {
   jumpHelloState: () => void;
 };
 
-function Hello({ age }: Props, ref: ForwardedRef<MyHandler>) {
+type PlaceUser = {
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+};
+
+function Hello({ friend }: Props, ref: ForwardedRef<MyHandler>) {
   const {
     session: { loginUser },
   } = useSession();
@@ -81,7 +90,25 @@ function Hello({ age }: Props, ref: ForwardedRef<MyHandler>) {
       {/* title은 component, component는 함수. */}
       <Body>
         <h3 className='text-center text-2xl'>myState: {myState}</h3>
-        This is Hello Component. {v} - {myState} - {age}
+        {isLoading && (
+          <h3 className='flex justify-center'>
+            <FaSpinner size={20} className='animate-spin text-slate-500' />
+          </h3>
+        )}
+        {error ? (
+          <strong className='text-red-500'>
+            {error.message && error.message.startsWith('404')
+              ? `Your friend is not found(${friend})`
+              : error.message}
+          </strong>
+        ) : (
+          <div className='flex h-10 items-center justify-center rounded-lg shadow-[0_0_10px_purple]'>
+            My friednd is {friendInfo?.username}.
+          </div>
+        )}
+        <p>
+          {v} -{friend}
+        </p>
       </Body>
       <button
         onClick={() => {
