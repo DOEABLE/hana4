@@ -103,11 +103,11 @@ function Hello({ friend }: Props, ref: ForwardedRef<MyHandler>) {
           </strong>
         ) : (
           <div className='flex h-10 items-center justify-center rounded-lg shadow-[0_0_10px_purple]'>
-            My friednd is {friendInfo?.username}.
+            My friend is {friendInfo?.username}.
           </div>
         )}
         <p>
-          {v} -{friend}
+          {v} - {friend}
         </p>
       </Body>
       <button
