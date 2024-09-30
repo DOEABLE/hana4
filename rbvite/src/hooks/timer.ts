@@ -59,6 +59,37 @@ export const useInterval = useTimer.bind({
   timerFn: setInterval,
   clearFn: clearInterval,
 });
+
+export const useDebounce = <T extends (...args: unknown[]) => ReturnType<T>>(
+  cb: T,
+  delay: number,
+  depArr: unknown[] = []
+) => {
+  const { reset, clear } = useTimeout(cb, delay);
+
+  useEffect(() => {
+    reset();
+    return clear;
+  }, [...depArr, delay]);
+};
+
+export const useDebounceX = <
+  T extends (...args: Parameters<T>) => ReturnType<T>,
+>(
+  cb: T,
+  delay: number,
+  depArr: unknown[] = []
+) => {
+  const cbRef = useRef(cb);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | number>();
+
+  useEffect(() => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(cbRef.current, delay);
+
+    return () => clearTimeout(timerRef.current);
+  }, [...depArr, delay]);
+};
 // export const useInterval = <
 //   T extends (...args: Parameters<T>) => ReturnType<T>,
 // >(

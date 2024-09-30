@@ -6,6 +6,7 @@ const cache: Record<string, unknown> = {};
 interface ErrorWithMessage {
   message: string;
 }
+
 const isErrorWithMessage = (error: unknown): error is ErrorWithMessage =>
   typeof error === 'object' &&
   error !== null &&
@@ -31,6 +32,7 @@ export const useFetch = <T>(
     (async function () {
       try {
         if (isCache && url in cache) {
+          setError(undefined);
           return setResult(cache[url] as T);
         }
 
