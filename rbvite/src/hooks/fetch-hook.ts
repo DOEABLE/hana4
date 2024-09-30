@@ -47,7 +47,10 @@ export const useFetch = <T>(
           cache[url] = data;
         }
       } catch (error) {
-        console.error('Error>>', error);
+        if (error && String(error) !== ABORT_REASON) {
+          console.error('Error>>', error, String(error));
+          setError(toErrorWithMessage(error));
+        }
       }
     })();
 
