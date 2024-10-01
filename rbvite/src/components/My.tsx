@@ -33,6 +33,13 @@ export default function My() {
     [searchRef.current?.value]
   );
 
+  const [ulHeight, setUlHeight] = useState(0);
+
+  const ulCbRef = (node: HTMLUListElement) => {
+    console.log('node>>', node, session.cart.length);
+    setUlHeight(node?.clientHeight);
+  };
+
   const totalPrice = useMemo(
     () => session.cart.reduce((acc, item) => acc + item.price, 0),
     [session.cart]
@@ -96,12 +103,12 @@ export default function My() {
           <input
             type='text'
             placeholder='찾을 품목을 검색하세요.'
-            value={searchTerm}
+            ref={searchTerm}
             onChange={toggleSearch} // 검색어 변경 시 상태 업데이트
             className='inp'
           />
         </div>
-        <ul className='mt-3 px-3'>
+        <ul ref={ulCbRef} className='mt-3 px-3'>
           {session.cart?.length > 0 ? (
             session.cart
               .filter(({ name }) => name.includes(searchTerm))
@@ -113,35 +120,25 @@ export default function My() {
           ) : (
             <li>No results found</li>
           )}
+          <li className='mt-3 text-center'>
+            {isAdding ? (
+              <Item
+                item={{ id: 0, name: '', price: 0 }}
+                toggleAdding={() => toggleAdding()}
+              />
+            ) : (
+              <Button onClick={toggleAdding}>
+                <FaPlus /> Add Item
+              </Button>
+            )}
+          </li>
         </ul>
       </div>
 
-      <ul className='mt-3 w-2/3 border p-3'>
-        {session.cart?.length ? (
-          session.cart.map((item) => (
-            <li key={item.id}>
-              <Item item={item} />
-            </li>
-          ))
-        ) : (
-          <li className='text-slate-500'>There is no items.</li>
-        )}
-        <li className='mt-3 text-center'>
-          {isAdding ? (
-            <Item
-              item={{ id: 0, name: '', price: 0 }}
-              toggleAdding={() => toggleAdding()}
-            />
-          ) : (
-            <Button onClick={toggleAdding}>
-              <FaPlus /> Add Item
-            </Button>
-          )}
-        </li>
-      </ul>
       <div className='mb-3 flex gap-5'>
         <span>*총액: {totalPrice.toLocaleString()}원</span>
         <span>*할인: {dcPrice.toFixed(0).toLocaleString()}원</span>
+        <span>{ulHeight}</span>
       </div>
       <Button onClick={toggleReloadSession}>Reload Session</Button>
     </>
