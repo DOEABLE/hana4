@@ -118,7 +118,7 @@ export default function My() {
                 </li>
               ))
           ) : (
-            <li>No results found</li>
+            <li className='text-slate-500'>No results found</li>
           )}
           <li className='mt-3 text-center'>
             {isAdding ? (

@@ -85,7 +85,7 @@ function Hello({ friend }: Props, ref: ForwardedRef<MyHandler>) {
     [friend]
   );
   return (
-    <div className='mt-5 border border-green-900 border-slate-300 p-4 text-2xl text-blue-300'>
+    <div className='mt-5 border border-green-900 p-4 text-2xl text-blue-300'>
       <Title text='Hi~ In Hello.tsx! My Name:' name={loginUser?.name} />
       {/* title은 component, component는 함수. */}
       <Body>
