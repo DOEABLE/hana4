@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tailwind Playground</title>
+    <link rel="stylesheet" href="../dist/output.css">   <!-- 얘를 달아줘야함 -->
+</head>
+
+<body>
+    <div class="flex mb-3 flex-row flex-wrap"> <!-- flex-row : 가로로정렬 flex-col :세로로 정렬 -->
+        <div class="w-32 bg-slate-900">111</div>
+        <div class="w-32 bg-primary">222</div>
+        <div class="w-32 bg-red-300" >333</div>
+        <div class="w-32 bg-green-300">444</div>
+        <div class="w-32 bg-slate-300">555</div>
+        <div class="w-32 bg-orange-500">666</div>
+        <div class="w-32 bg-lime-700">777</div>    
+    </div>
+
+    <div class="grid grid-cols-3 gap-3">                            <!-- 비교적 정돈되어보임. 아무것도 안주면 기본적으로 col 1개 -->
+        <div class="w-32 order-2 bg-lime-700">111</div>         <!-- order-2 기존에 있던 표에서 새로운 표를 만들어내서 하단에 정렬됨 -->
+        <div class="w-32 bg-primary">222</div>
+        <div class="w-32 bg-orange-500">333</div>
+        <div class="w-32 bg-green-300">444</div>
+        <div class="w-32 bg-slate-50">555</div>
+        <div class="w-32 bg-orange-900">666</div>
+        <div class="w-32 order-2 bg-red-600">777</div>    
+    </div>
+
+    <!-- 버튼에 효과주기 (index.css)-->
+    <div class="m-3 p-3">
+        <button class="btn">btn-default</button>
+        <button class="btn btn-primary">btn-primary</button>    
+        <button class="btn text-white bg-red-500 hover:bg-red-600 focus:ring-red-400">btn-Danger</button> <!-- shadow-md : 버튼에 약간의 그림자를 준다. -->
+        <button class="btn text-white bg-green-700 hover:bg-green-600 focus:ring-green-400">btn-success</button> 
+    </div>
+    
+
+    <div class="container mx-auto h-lvh w-fullx min-w-full bg-no-repeat bg-center bg-cover" style="background-image: url('https://cdn.pixabay.com/photo/2018/03/04/17/23/tiger-3198598_1280.jpg');">    <!-- mx-auto 자동 가운데 정렬 -->
+    <h1 class="text-7xl text-blue-100 hover:text-blue-700 font-extrabold underline bg-danger italic underline-offset-2">주모 여기 한강사이즈 바크콜 하나요오</h1> <!-- hover 마우스 갖다대면 hover색으로 바뀜 -->
+
+
+
+
+    
+    <p class="text-3xl w-full text-ellipsisx overflow-hiddenx text-nowrapx">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet, sapiente! Minus exercitationem fugiat quam hic eos quas, veritatis provident, maxime quasi quae quisquam, dolore fuga facere similique odit ab explicabo!</p>
+    <!-- text-ellipsis :말줄임 text-ellipsis : 화면에서 잘리는 부분 버리기 -->
+        <ul class ="container mx-auto border border-white p-3 m-100" >
+            <li class="text-slate-50  first:bg-red-500">000000</li>             <!-- 자식한테 first옵션을 다 주면 첫번째 자식만 해당옵션을 먹는다 -->
+            <li class="text-red-500">11111111</li>
+            <li class="text-green-700  first:bg-red-500">222</li>
+            <li class="text-gray-500  first:bg-red-500 font-extrabold underline">333</li>
+            <li class="text-lime-200 last:bg-blue-300">444</li>
+        </ul>
+
+        <div class="bg-gradient-to-t from-slate-300 to-blue-300">
+            <button href="#" class="w-96 h-60 bg-green-300 text-3xl hover: bg-green-50 transition-colors delay-200 animate-bounceX">HOHOHOHOHOHOHOI</button>
+            WOOOOOOOOOOOOOOOOVCB</div>
+            <button class="mt-5 w-96 h-60  bg-green-300 text-3xl hover: bg-blue-100 translate-x-4 skew-y-6 delay-200 animate-bounce">Animation</button>
+    </div>
+</body>
+</html>

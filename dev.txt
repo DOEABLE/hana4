@@ -6,3 +6,7 @@ dev44
 dev33
 ddd
 ㅋㅋwefsdfs
+<<<<<<< HEAD
+dev edit
+=======
+>>>>>>> 2a084aa2e6411f79d18df09cd353e1e291ec8f7c

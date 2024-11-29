@@ -1,0 +1,48 @@
+erDiagram
+%%data 기반으로 엔티티 추출
+    Account {
+        int account_id PK
+        string owner_name
+        decimal balance
+        enum account_type
+        datetime created_at
+        enum status
+    }
+%% 송금 및 이체 정보 테이블
+    Transaction {
+        int transaction_id PK
+        int from_account FK
+        int to_account FK
+        decimal amount
+        datetime timestamp
+        enum transaction_type
+        string description
+        
+    }
+
+    Member {
+        int member_id PK
+        string mamber_name
+        string phoneNumber
+    }
+
+    Bank{
+        int bank_id PK
+        string bank_name
+    }
+    
+    Branch {
+        int branch_id PK
+        string branch_name
+        int distance
+        string address
+        string contact
+        string businessHours
+    }
+    
+
+%%from, to field로 송금/입금 계좌 지정
+    Account ||--o{ Transaction : "from_account"
+    Account ||--o{ Transaction : "to_account"
+    Bank ||--o{ Transaction : "from_account"
+    Bank ||--o{ Transaction : "to_account"
